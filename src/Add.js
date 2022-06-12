@@ -1,6 +1,2 @@
-function Add(str) {
-  if (str === "") {
-    return 0;
-  }
-}
+function Add(str) {}
 module.exports = Add;
