@@ -8,11 +8,11 @@ function getDelim(arr) {
     return arr[arr.length - 1]; //checking if the custom delimiter has a length = 1
   }
   let i = 2;
-  let customDelim = "";
+  let delimSet = [];
   while (i < arr.length) {
     if (arr[i] === "[") {
       i++;
-
+      let customDelim = "";
       while (arr[i] !== "]") {
         if (specialChar.includes(arr[i])) {
           customDelim += `\\${arr[arr.length - 1]}`;
@@ -20,10 +20,11 @@ function getDelim(arr) {
         customDelim += arr[i];
         i++;
       }
+      delimSet.push(customDelim);
     }
     i++;
   }
-  return customDelim;
+  return delimSet.join("|");
 }
 
 // Function to create the finalArray where the sum will be calculated
@@ -59,6 +60,10 @@ function Add(str) {
   }
 
   let finalArray = getFinalArray(finalArrSet);
+  let negNums = finalArray.filter((num) => parseInt(num) < 0);
+  if (negNums.length) {
+    return `negatives not allowed: ${negNums}`;
+  }
   let sum = 0;
   for (let i = 0; i < finalArray.length; i++) {
     sum += parseInt(finalArray[i]);

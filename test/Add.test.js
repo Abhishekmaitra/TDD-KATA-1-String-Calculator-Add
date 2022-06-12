@@ -44,12 +44,12 @@ describe("Add", () => {
   });
 
   // Test-Case-10
-  test("10 returns sum of integers present in a string", () => {
+  test("10. throws an exception with a negative number ", () => {
     expect(Add("-1,2")).toBe("negatives not allowed: -1");
   });
 
   // Test-Case-11
-  test("11 returns sum of integers present in a string", () => {
+  test("11. throws an exception with multiple negative numbers", () => {
     expect(Add("-1,2,-4,-5")).toBe("negatives not allowed: -1,-4,-5");
   });
 
