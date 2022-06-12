@@ -1,6 +1,10 @@
 // Function to fetch custom delimiter from the first line of String
 function getDelim(arr) {
+  let specialChar = ["*"];
   if (arr.length === 3) {
+    if (specialChar.includes(arr[arr.length - 1])) {
+      return `\\${arr[arr.length - 1]}`;
+    }
     return arr[arr.length - 1]; //checking if the custom delimiter has a length = 1
   }
   let i = 2;
@@ -10,6 +14,9 @@ function getDelim(arr) {
       i++;
 
       while (arr[i] !== "]") {
+        if (specialChar.includes(arr[i])) {
+          customDelim += `\\${arr[arr.length - 1]}`;
+        }
         customDelim += arr[i];
         i++;
       }
