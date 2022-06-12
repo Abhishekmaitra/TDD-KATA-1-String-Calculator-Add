@@ -15,9 +15,8 @@ function getDelim(arr) {
       let customDelim = "";
       while (arr[i] !== "]") {
         if (specialChar.includes(arr[i])) {
-          customDelim += `\\${arr[arr.length - 1]}`;
-        }
-        customDelim += arr[i];
+          customDelim += `\\${arr[i]}`;
+        } else customDelim += arr[i];
         i++;
       }
       delimSet.push(customDelim);
@@ -60,13 +59,18 @@ function Add(str) {
   }
 
   let finalArray = getFinalArray(finalArrSet);
-  let negNums = finalArray.filter((num) => parseInt(num) < 0);
+  let finalArrayWithoutNumBiggerThan100 = finalArray.filter(
+    (n) => parseInt(n) <= 1000
+  );
+  let negNums = finalArrayWithoutNumBiggerThan100.filter(
+    (num) => parseInt(num) < 0
+  ); //Creating an array of negative numbers
   if (negNums.length) {
     return `negatives not allowed: ${negNums}`;
   }
   let sum = 0;
-  for (let i = 0; i < finalArray.length; i++) {
-    sum += parseInt(finalArray[i]);
+  for (let i = 0; i < finalArrayWithoutNumBiggerThan100.length; i++) {
+    sum += parseInt(finalArrayWithoutNumBiggerThan100[i]);
   }
   return sum;
 }
